@@ -37,3 +37,6 @@ debug-assertions = true
 lto = false
 opt-level = 0
 rpath = false
+
+[dev-dependencies]
+num-traits = "0.2.11"
