@@ -18,12 +18,12 @@
 //#![deny(warnings)]
 
 //TODO: Unify trait impl macro def'ns for even less boilerplate
-mod checked;
-mod overflowing;
-mod saturating;
-mod wrapping;
+mod check;
+mod overflow;
+mod saturate;
+mod wrap;
 
-pub use checked::Checked;
-pub use overflowing::Overflowing;
-pub use saturating::Saturating;
-pub use wrapping::Wrapping;
+pub use check::Check;
+pub use overflow::Overflow;
+pub use saturate::Saturate;
+pub use wrap::Wrap;

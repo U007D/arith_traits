@@ -2,7 +2,7 @@
 #![allow(clippy::use_self)]
 #[cfg(test)]
 mod unit_tests;
-pub trait Overflowing<T = Self> {
+pub trait Overflow<T = Self> {
     type Output;
 
     fn overflowing_abs(self) -> Self::Output;
@@ -54,7 +54,7 @@ macro_rules! unary_op_impl {
 
 macro_rules! overflowing_impl {
     ($($t:ty)*) => ($(
-        impl Overflowing for $t {
+        impl Overflow for $t {
             type Output = (Self, bool);
 
             binary_op_impl! {

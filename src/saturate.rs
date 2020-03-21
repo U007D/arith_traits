@@ -3,7 +3,7 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait Saturating<T = Self> {
+pub trait Saturate<T = Self> {
     type Output;
 
     fn saturating_abs(self) -> Self::Output;
@@ -55,7 +55,7 @@ macro_rules! unary_op_impl {
 
 macro_rules! saturating_impl {
     ($($t:ty)*) => ($(
-        impl Saturating for $t {
+        impl Saturate for $t {
             type Output = Self;
 
             binary_op_impl! {
