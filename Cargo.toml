@@ -10,7 +10,7 @@ repository = "https://github.com/u007d/arith_traits"
 version = "0.1.0"
 
 [dependencies]
-thiserror = "*"
+thiserror = "1.*"
 
 [profile.dev]
 codegen-units = 1
