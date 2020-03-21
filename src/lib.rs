@@ -18,6 +18,7 @@
 //#![deny(warnings)]
 
 //TODO: Unify trait impl macro def'ns for even less boilerplate
+//TODO: Add `Into<Self>` impls to cut down boilerplate & increase coverage
 mod check;
 mod overflow;
 mod saturate;
