@@ -19,15 +19,11 @@
 
 //TODO: Unify trait impl macro def'ns for even less boilerplate
 mod checked;
-mod consts;
-mod error;
 mod overflowing;
 mod saturating;
 mod wrapping;
 
 pub use checked::Checked;
-pub use error::Error;
 pub use overflowing::Overflowing;
 pub use saturating::Saturating;
 pub use wrapping::Wrapping;
-pub type Result<T, E = Error> = std::result::Result<T, E>;
