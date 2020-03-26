@@ -1,14 +1,11 @@
-// suppress `use_self` recommendation; unavoidable in macro context
-#![allow(clippy::use_self)]
-
 #[macro_export]
 macro_rules! binary_op_impl {
     ($t:ty, $($f:ident),*) => ($(
         // suppress false positive `unconditional_recursion` warnings; see `unit_tests` for proof
         #[allow(unconditional_recursion)]
         #[inline]
-        fn $f(self, rhs: impl Into<$t>) -> Self::Output {
-            Self::$f(self, rhs.into())
+        fn $f(self, rhs: $t) -> Self::Output {
+            Self::$f(self, rhs)
         }
     )*)
 }

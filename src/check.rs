@@ -1,3 +1,6 @@
+// suppress `use_self` recommendation; unavoidable in macro context
+#![allow(clippy::use_self)]
+
 #[cfg(test)]
 mod unit_tests;
 
@@ -5,17 +8,17 @@ pub trait Check<T = Self> {
     type Output;
 
     fn checked_abs(self) -> Self::Output;
-    fn checked_add(self, rhs: impl Into<T>) -> Self::Output;
-    fn checked_div(self, rhs: impl Into<T>) -> Self::Output;
-    fn checked_div_euclid(self, rhs: impl Into<T>) -> Self::Output;
-    fn checked_mul(self, rhs: impl Into<T>) -> Self::Output;
+    fn checked_add(self, rhs: T) -> Self::Output;
+    fn checked_div(self, rhs: T) -> Self::Output;
+    fn checked_div_euclid(self, rhs: T) -> Self::Output;
+    fn checked_mul(self, rhs: T) -> Self::Output;
     fn checked_neg(self) -> Self::Output;
     fn checked_pow(self, rhs: u32) -> Self::Output;
-    fn checked_rem(self, rhs: impl Into<T>) -> Self::Output;
-    fn checked_rem_euclid(self, rhs: impl Into<T>) -> Self::Output;
+    fn checked_rem(self, rhs: T) -> Self::Output;
+    fn checked_rem_euclid(self, rhs: T) -> Self::Output;
     fn checked_shl(self, rhs: u32) -> Self::Output;
     fn checked_shr(self, rhs: u32) -> Self::Output;
-    fn checked_sub(self, rhs: impl Into<T>) -> Self::Output;
+    fn checked_sub(self, rhs: T) -> Self::Output;
 }
 
 macro_rules! checked_impl {

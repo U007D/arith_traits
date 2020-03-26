@@ -1,3 +1,6 @@
+// suppress `use_self` recommendation; unavoidable in macro context
+#![allow(clippy::use_self)]
+
 #[cfg(test)]
 mod unit_tests;
 
@@ -5,17 +8,17 @@ pub trait Saturate<T = Self> {
     type Output;
 
     fn saturating_abs(self) -> Self::Output;
-    fn saturating_add(self, rhs: impl Into<T>) -> Self::Output;
-    fn saturating_div(self, rhs: impl Into<T>) -> Self::Output;
-    fn saturating_div_euclid(self, rhs: impl Into<T>) -> Self::Output;
-    fn saturating_mul(self, rhs: impl Into<T>) -> Self::Output;
+    fn saturating_add(self, rhs: T) -> Self::Output;
+    fn saturating_div(self, rhs: T) -> Self::Output;
+    fn saturating_div_euclid(self, rhs: T) -> Self::Output;
+    fn saturating_mul(self, rhs: T) -> Self::Output;
     fn saturating_neg(self) -> Self::Output;
     fn saturating_pow(self, rhs: u32) -> Self::Output;
-    fn saturating_rem(self, rhs: impl Into<T>) -> Self::Output;
-    fn saturating_rem_euclid(self, rhs: impl Into<T>) -> Self::Output;
+    fn saturating_rem(self, rhs: T) -> Self::Output;
+    fn saturating_rem_euclid(self, rhs: T) -> Self::Output;
     fn saturating_shl(self, rhs: u32) -> Self::Output;
     fn saturating_shr(self, rhs: u32) -> Self::Output;
-    fn saturating_sub(self, rhs: impl Into<T>) -> Self::Output;
+    fn saturating_sub(self, rhs: T) -> Self::Output;
 }
 
 macro_rules! saturating_impl {

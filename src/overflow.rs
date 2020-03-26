@@ -1,3 +1,6 @@
+// suppress `use_self` recommendation; unavoidable in macro context
+#![allow(clippy::use_self)]
+
 #[cfg(test)]
 mod unit_tests;
 
@@ -5,17 +8,17 @@ pub trait Overflow<T = Self> {
     type Output;
 
     fn overflowing_abs(self) -> Self::Output;
-    fn overflowing_add(self, rhs: impl Into<T>) -> Self::Output;
-    fn overflowing_div(self, rhs: impl Into<T>) -> Self::Output;
-    fn overflowing_div_euclid(self, rhs: impl Into<T>) -> Self::Output;
-    fn overflowing_mul(self, rhs: impl Into<T>) -> Self::Output;
+    fn overflowing_add(self, rhs: T) -> Self::Output;
+    fn overflowing_div(self, rhs: T) -> Self::Output;
+    fn overflowing_div_euclid(self, rhs: T) -> Self::Output;
+    fn overflowing_mul(self, rhs: T) -> Self::Output;
     fn overflowing_neg(self) -> Self::Output;
     fn overflowing_pow(self, rhs: u32) -> Self::Output;
-    fn overflowing_rem(self, rhs: impl Into<T>) -> Self::Output;
-    fn overflowing_rem_euclid(self, rhs: impl Into<T>) -> Self::Output;
+    fn overflowing_rem(self, rhs: T) -> Self::Output;
+    fn overflowing_rem_euclid(self, rhs: T) -> Self::Output;
     fn overflowing_shl(self, rhs: u32) -> Self::Output;
     fn overflowing_shr(self, rhs: u32) -> Self::Output;
-    fn overflowing_sub(self, rhs: impl Into<T>) -> Self::Output;
+    fn overflowing_sub(self, rhs: T) -> Self::Output;
 }
 
 macro_rules! overflowing_impl {

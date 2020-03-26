@@ -1,3 +1,6 @@
+// suppress `use_self` recommendation; unavoidable in macro context
+#![allow(clippy::use_self)]
+
 #[cfg(test)]
 mod unit_tests;
 
@@ -5,17 +8,17 @@ pub trait Wrap<T = Self> {
     type Output;
 
     fn wrapping_abs(self) -> Self::Output;
-    fn wrapping_add(self, rhs: impl Into<T>) -> Self::Output;
-    fn wrapping_div(self, rhs: impl Into<T>) -> Self::Output;
-    fn wrapping_div_euclid(self, rhs: impl Into<T>) -> Self::Output;
-    fn wrapping_mul(self, rhs: impl Into<T>) -> Self::Output;
+    fn wrapping_add(self, rhs: T) -> Self::Output;
+    fn wrapping_div(self, rhs: T) -> Self::Output;
+    fn wrapping_div_euclid(self, rhs: T) -> Self::Output;
+    fn wrapping_mul(self, rhs: T) -> Self::Output;
     fn wrapping_neg(self) -> Self::Output;
     fn wrapping_pow(self, rhs: u32) -> Self::Output;
-    fn wrapping_rem(self, rhs: impl Into<T>) -> Self::Output;
-    fn wrapping_rem_euclid(self, rhs: impl Into<T>) -> Self::Output;
+    fn wrapping_rem(self, rhs: T) -> Self::Output;
+    fn wrapping_rem_euclid(self, rhs: T) -> Self::Output;
     fn wrapping_shl(self, rhs: u32) -> Self::Output;
     fn wrapping_shr(self, rhs: u32) -> Self::Output;
-    fn wrapping_sub(self, rhs: impl Into<T>) -> Self::Output;
+    fn wrapping_sub(self, rhs: T) -> Self::Output;
 }
 
 macro_rules! wrapping_impl {
