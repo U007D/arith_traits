@@ -19,6 +19,9 @@
 
 //TODO: Unify trait impl macro def'ns for even less boilerplate
 //TODO: Add `Into<Self>` impls to cut down boilerplate & increase coverage
+#[macro_use]
+mod general_macros; // macros must be declared before trait modules
+
 mod check;
 mod overflow;
 mod saturate;
