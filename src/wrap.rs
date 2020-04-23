@@ -37,7 +37,7 @@ macro_rules! wrapping_impl {
                 wrapping_sub
             }
 
-            binary_op_rhs_u32_impl! {
+            binary_op_impl! {
                 u32,
                 wrapping_pow,
                 wrapping_shl,

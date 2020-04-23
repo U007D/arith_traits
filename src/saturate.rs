@@ -37,7 +37,7 @@ macro_rules! saturating_impl {
                 saturating_sub
             }
 
-            binary_op_rhs_u32_impl! {
+            binary_op_impl! {
                 u32,
                 saturating_pow,
                 saturating_shl,

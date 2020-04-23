@@ -37,7 +37,7 @@ macro_rules! overflowing_impl {
                 overflowing_sub
             }
 
-            binary_op_rhs_u32_impl! {
+            binary_op_impl! {
                 u32,
                 overflowing_pow,
                 overflowing_shl,

@@ -37,7 +37,7 @@ macro_rules! checked_impl {
                 checked_sub
             }
 
-            binary_op_rhs_u32_impl! {
+            binary_op_impl! {
                 u32,
                 checked_pow,
                 checked_shl,
