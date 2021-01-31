@@ -1,16 +1,17 @@
 [package]
 authors = ["u007d <b2b@humanenginuity.com>"]
 categories = []
+description = "Traits unifying types based on various supported arithmetic operations."
 edition = "2018"
-keywords = []
-license = "MIT or Apache-2.0"
+keywords = ["arithmetic", "numeric", "traits"]
+license = "MIT OR Apache-2.0"
 name = "arith_traits"
 readme = "README.md"
 repository = "https://github.com/u007d/arith_traits"
 version = "0.1.0"
 
 [dependencies]
-thiserror = "1.*"
+thiserror = "1"
 
 [profile.dev]
 codegen-units = 1
@@ -39,4 +40,4 @@ opt-level = 0
 rpath = false
 
 [dev-dependencies]
-num-traits = "0.2.11"
+num-traits = "0.2"
