@@ -2,7 +2,7 @@
 authors = ["u007d <b2b@humanenginuity.com>"]
 categories = []
 description = "Traits unifying types based on various supported arithmetic operations."
-edition = "2018"
+edition = "2021"
 keywords = ["arithmetic", "numeric", "traits"]
 license = "MIT OR Apache-2.0"
 name = "arith_traits"
@@ -41,3 +41,4 @@ rpath = false
 
 [dev-dependencies]
 num-traits = "0.2"
+assert2 = "0.3.6"

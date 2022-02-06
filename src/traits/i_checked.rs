@@ -4,7 +4,7 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait Check<T = Self> {
+pub trait IChecked<T = Self> {
     type Output;
 
     fn checked_abs(self) -> Self::Output;
@@ -23,7 +23,7 @@ pub trait Check<T = Self> {
 
 macro_rules! checked_impl {
     ($($t:ty)*) => ($(
-        impl Check for $t {
+        impl IChecked for $t {
             type Output = Option<Self>;
 
             binary_op_impl! {

@@ -4,7 +4,7 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait Overflow<T = Self> {
+pub trait IOverflowing<T = Self> {
     type Output;
 
     fn overflowing_abs(self) -> Self::Output;
@@ -23,7 +23,7 @@ pub trait Overflow<T = Self> {
 
 macro_rules! overflowing_impl {
     ($($t:ty)*) => ($(
-        impl Overflow for $t {
+        impl IOverflowing for $t {
             type Output = (Self, bool);
 
             binary_op_impl! {
