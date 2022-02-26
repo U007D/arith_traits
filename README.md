@@ -7,7 +7,8 @@ checked arithmetic, you have discovered that `std` does not define a `trait` tha
 implement.
 
 This crate remedies that.  It was developed to simplify the implementation of the
-[Ranged](https://crates.io/crates/ranged) crate.  It may also be of value to other crates performing
+[`arranged`](https://github.com/u007d/arranged) crate and is leveraged by the companion
+[`arith_wrappers`](https://github.com/u007d/arith_wrappers) crate.  It may also be of value to other crates performing
 generic arithmetic.
 
 This crate is currently at the PoC stage and is very incomplete.

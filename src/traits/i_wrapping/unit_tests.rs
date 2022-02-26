@@ -4,7 +4,7 @@ use num_traits::identities::One;
 
 #[test]
 fn unconditional_recursion_warning_is_a_false_positive() {
-    // Given an `IWrapping` subtracter
+    // Given an `IWrapping` "subtracter" function
     fn sub_one<T>(n: T) -> <T as IWrapping>::Output
     where
         T: IWrapping + One,
@@ -13,10 +13,10 @@ fn unconditional_recursion_warning_is_a_false_positive() {
     }
     let expected = i32::MAX;
 
-    // When using the `Wrap` subtracter
+    // When using the `IWrapping` "subtracter" function
     let result = sub_one(i32::MIN);
 
     // Then it does not recurse (i.e. internally calls `T::wrapping_add()`, not
-    // `Wrap::wrapping_add()`)
+    // `IWrapping::wrapping_sub()` as recursion would be infinite and a stack overflow would result)
     assert!(result == expected);
 }

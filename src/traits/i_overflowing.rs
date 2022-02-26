@@ -4,7 +4,11 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait IOverflowing<T = Self> {
+pub trait IOverflowing<T = Self> where Self: PartialOrd {
+    const MAX: Self;
+    const MIN: Self;
+    // TODO: look for a way to enforce @ compile time ---vvv
+    //const INVARIANT: [(); 0 - (Self::MIN <= Self::MAX) as usize] = [];
     type Output;
 
     fn overflowing_abs(self) -> Self::Output;
@@ -24,6 +28,8 @@ pub trait IOverflowing<T = Self> {
 macro_rules! overflowing_impl {
     ($($t:ty)*) => ($(
         impl IOverflowing for $t {
+            const MAX: $t = <$t>::MAX;
+            const MIN: $t = <$t>::MIN;
             type Output = (Self, bool);
 
             binary_op_impl! {

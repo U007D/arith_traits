@@ -1,10 +1,14 @@
-// suppress `use_self` recommendation; unavoidable in macro context
+// suppress `use_self` recommendation; not avoidable in macro context
 #![allow(clippy::use_self)]
 
 #[cfg(test)]
 mod unit_tests;
 
-pub trait IChecked<T = Self> {
+pub trait IChecked<T = Self>: Sized where Self: PartialOrd {
+    const MAX: Self;
+    const MIN: Self;
+    // TODO: look for a way to enforce @ compile time ---vvv
+    //const INVARIANT: [(); 0 - (Self::MIN <= Self::MAX) as usize] = [];
     type Output;
 
     fn checked_abs(self) -> Self::Output;
@@ -24,6 +28,8 @@ pub trait IChecked<T = Self> {
 macro_rules! checked_impl {
     ($($t:ty)*) => ($(
         impl IChecked for $t {
+            const MAX: $t = <$t>::MAX;
+            const MIN: $t = <$t>::MIN;
             type Output = Option<Self>;
 
             binary_op_impl! {

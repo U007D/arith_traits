@@ -28,7 +28,7 @@
 // #![allow(clippy::implicit_return)]
 
 #[macro_use]
-mod general_macros; // macros must be declared before trait modules
+mod op_impl_macros; // macros must be declared before trait modules
 mod traits;
 
 pub use traits::{IChecked, IOverflowing, ISaturating, IWrapping};

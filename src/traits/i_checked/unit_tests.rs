@@ -22,10 +22,10 @@ fn unconditional_recursion_warning_is_a_false_positive() {
     }
     let expected = None;
 
-    // When using the `Check` "adder" function
+    // When using the `IChecked` "adder" function
     let result = add_one(i64::MAX);
 
     // Then it does not recurse (i.e. internally calls `T::checked_add()`, not
-    // `Check::checked_add()`)
+    // `IChecked::checked_add()` as recursion would be infinite and a stack overflow would result)
     assert!(result == expected);
 }
