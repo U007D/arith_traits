@@ -1,4 +1,7 @@
 #[macro_export]
+
+// TODO: Use UFCS instead of suppressing linter false-positives to disambiguate between trait methods and inherent
+//       methods of the same name.  Improves readability to the user without context.
 macro_rules! binary_op_impl {
     ($typ:ty, $($op:ident),*) => ($(
         // suppress false-positive `unconditional_recursion` warnings; see

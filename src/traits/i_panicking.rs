@@ -1,16 +1,13 @@
 // suppress `use_self` recommendation; unavoidable in macro context
 #![allow(clippy::use_self)]
 
-use crate::IChecked;
 
 #[cfg(test)]
 mod unit_tests;
 
+use crate::IChecked;
+
 pub trait IPanicking<T = Self> where Self: PartialOrd {
-    const MAX: T;
-    const MIN: T;
-    // TODO: look for a way to enforce @ compile time ---vvv
-    //const INVARIANT: [(); 0 - (Self::MIN <= Self::MAX) as usize] = [];
     type Output;
 
     fn panicking_abs(self) -> Self::Output;
@@ -30,8 +27,6 @@ pub trait IPanicking<T = Self> where Self: PartialOrd {
 macro_rules! panicking_impl {
     ($($t:ty)*) => ($(
         impl IPanicking for $t where $t: IChecked {
-            const MAX: $t = <$t>::MAX;
-            const MIN: $t = <$t>::MIN;
             type Output = Self;
 
             panicking_binary_op_impl! {

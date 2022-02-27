@@ -5,10 +5,6 @@
 mod unit_tests;
 
 pub trait ISaturating<T = Self> where Self: PartialOrd {
-    const MAX: T;
-    const MIN: T;
-    // TODO: look for a way to enforce @ compile time ---vvv
-    //const INVARIANT: [(); 0 - (Self::MIN <= Self::MAX) as usize] = [];
     type Output;
 
     fn saturating_abs(self) -> Self::Output;
@@ -28,8 +24,6 @@ pub trait ISaturating<T = Self> where Self: PartialOrd {
 macro_rules! saturating_impl {
     ($($t:ty)*) => ($(
         impl ISaturating for $t {
-            const MAX: $t = <$t>::MAX;
-            const MIN: $t = <$t>::MIN;
             type Output = Self;
 
             binary_op_impl! {

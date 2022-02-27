@@ -5,10 +5,6 @@
 mod unit_tests;
 
 pub trait IChecked<T = Self>: Sized where Self: PartialOrd {
-    const MAX: T;
-    const MIN: T;
-    // TODO: look for a way to enforce @ compile time ---vvv
-    //const INVARIANT: [(); 0 - (Self::MIN <= Self::MAX) as usize] = [];
     type Output;
 
     fn checked_abs(self) -> Self::Output;
@@ -28,8 +24,6 @@ pub trait IChecked<T = Self>: Sized where Self: PartialOrd {
 macro_rules! checked_impl {
     ($($t:ty)*) => ($(
         impl IChecked for $t {
-            const MAX: $t = <$t>::MAX;
-            const MIN: $t = <$t>::MIN;
             type Output = Option<Self>;
 
             binary_op_impl! {
