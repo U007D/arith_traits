@@ -7,8 +7,8 @@ use crate::IChecked;
 mod unit_tests;
 
 pub trait IPanicking<T = Self> where Self: PartialOrd {
-    const MAX: Self;
-    const MIN: Self;
+    const MAX: T;
+    const MIN: T;
     // TODO: look for a way to enforce @ compile time ---vvv
     //const INVARIANT: [(); 0 - (Self::MIN <= Self::MAX) as usize] = [];
     type Output;
