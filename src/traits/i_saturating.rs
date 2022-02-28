@@ -4,7 +4,10 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait ISaturating<T = Self> where Self: PartialOrd {
+pub trait ISaturating<T = Self>
+where
+    Self: PartialOrd,
+{
     type Output;
 
     fn saturating_abs(self) -> Self::Output;

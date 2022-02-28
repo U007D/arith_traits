@@ -4,7 +4,10 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait IOverflowing<T = Self> where Self: PartialOrd {
+pub trait IOverflowing<T = Self>
+where
+    Self: PartialOrd,
+{
     type Output;
 
     fn overflowing_abs(self) -> Self::Output;

@@ -1,4 +1,7 @@
-pub trait IMinMax where Self: PartialOrd {
+pub trait IMinMax
+where
+    Self: PartialOrd,
+{
     const MAX: Self;
     const MIN: Self;
 

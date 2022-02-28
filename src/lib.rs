@@ -8,6 +8,7 @@
     clippy::unwrap_used
 )]
 #![allow(
+    clippy::enum_glob_use,
     clippy::equatable_if_let,
     clippy::implicit_return,
     clippy::iter_nth_zero,
@@ -29,6 +30,7 @@
 
 #[macro_use]
 mod op_impl_macros; // macros must be declared before trait modules
+mod impls;
 mod traits;
 
 pub use traits::{IChecked, IMinMax, IOverflowing, ISaturating, IWrapping};

@@ -1,13 +1,15 @@
 // suppress `use_self` recommendation; unavoidable in macro context
 #![allow(clippy::use_self)]
 
-
 #[cfg(test)]
 mod unit_tests;
 
 use crate::IChecked;
 
-pub trait IPanicking<T = Self> where Self: PartialOrd {
+pub trait IPanicking<T = Self>
+where
+    Self: PartialOrd,
+{
     type Output;
 
     fn panicking_abs(self) -> Self::Output;

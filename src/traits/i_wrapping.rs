@@ -4,13 +4,7 @@
 #[cfg(test)]
 mod unit_tests;
 
-use crate::IMinMax;
-
-pub trait IWrapping<T = Self>: IMinMax
-where
-    Self: PartialOrd,
-    T: PartialOrd,
-{
+pub trait IWrapping<T = Self> {
     type Output;
 
     fn wrapping_abs(self) -> Self::Output;

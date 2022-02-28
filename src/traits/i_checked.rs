@@ -4,7 +4,10 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait IChecked<T = Self>: Sized where Self: PartialOrd {
+pub trait IChecked<T = Self>: Sized
+where
+    Self: PartialOrd,
+{
     type Output;
 
     fn checked_abs(self) -> Self::Output;
