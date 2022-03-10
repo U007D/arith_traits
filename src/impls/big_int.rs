@@ -5,7 +5,7 @@ use crate::IWrapping;
 use num::{BigInt, Integer, Signed};
 use std::ops::{Add, Div, Mul, Neg, Rem, Shl, Shr, Sub};
 
-/// `BigInt` gets an `IWrapping` impl because it will be the default extra-large type when the largest built-in type
+/// `BigInt` gets an `IWrapping` impl because it is the default signed extra-large type when the largest built-in type
 /// is used in certain circumstances (e.g. `(i*::MIN..=i*::MAX).count() == i*::MAX + 1`).  Even when `i256` comes along,
 /// this problem will remain, and `BigInt` will remain the default solution.
 impl IWrapping for BigInt {
