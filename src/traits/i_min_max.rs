@@ -1,9 +1,9 @@
-pub trait IMinMax
+pub trait IMinMax<TValueType = Self>
 where
-    Self: PartialOrd,
+    TValueType: PartialOrd,
 {
-    const MAX: Self;
-    const MIN: Self;
+    const MAX: TValueType;
+    const MIN: TValueType;
 
     // TODO: look for a way to enforce @ compile time ---vvv
     //const INVARIANT: [(); 0 - (Self::MIN <= Self::MAX) as usize] = [];
