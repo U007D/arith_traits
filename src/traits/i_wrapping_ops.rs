@@ -4,7 +4,7 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait IWrapping<T = Self> {
+pub trait IWrappingOps<T = Self> {
     type Output;
 
     fn wrapping_abs(self) -> Self::Output;
@@ -23,7 +23,7 @@ pub trait IWrapping<T = Self> {
 
 macro_rules! wrapping_impl {
     ($($t:ty)*) => ($(
-        impl IWrapping for $t {
+        impl IWrappingOps for $t {
             type Output = Self;
 
             binary_op_impl! {

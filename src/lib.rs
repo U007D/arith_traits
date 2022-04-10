@@ -33,4 +33,4 @@ mod op_impl_macros; // macros must be declared before trait modules
 mod impls;
 mod traits;
 
-pub use traits::{IChecked, IMinMax, IOverflowing, ISaturating, IWrapping};
+pub use traits::{ICheckedOps, IMinMax, IOverflowingOps, ISaturatingOps, IWrappingOps};

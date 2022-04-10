@@ -14,9 +14,9 @@ use num_traits::identities::One;
 #[test]
 fn unconditional_recursion_warning_is_a_false_positive() {
     // Given an `IChecked` "adder" function
-    fn add_one<T>(n: T) -> <T as IChecked>::Output
+    fn add_one<T>(n: T) -> <T as ICheckedOps>::Output
     where
-        T: IChecked + One,
+        T: ICheckedOps + One,
     {
         n.checked_add(T::one())
     }

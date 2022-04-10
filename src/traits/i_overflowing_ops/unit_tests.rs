@@ -5,9 +5,9 @@ use num_traits::identities::One;
 #[test]
 fn unconditional_recursion_warning_is_a_false_positive() {
     // Given an `IOverflowing` "adder" function
-    fn add_one<T>(n: T) -> <T as IOverflowing>::Output
+    fn add_one<T>(n: T) -> <T as IOverflowingOps>::Output
     where
-        T: IOverflowing + One,
+        T: IOverflowingOps + One,
     {
         n.overflowing_add(T::one())
     }

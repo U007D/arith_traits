@@ -4,7 +4,7 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait ISaturating<T = Self>
+pub trait ISaturatingOps<T = Self>
 where
     Self: PartialOrd,
 {
@@ -26,7 +26,7 @@ where
 
 macro_rules! saturating_impl {
     ($($t:ty)*) => ($(
-        impl ISaturating for $t {
+        impl ISaturatingOps for $t {
             type Output = Self;
 
             binary_op_impl! {

@@ -35,7 +35,7 @@ macro_rules! panicking_unary_op_impl {
         // `std` function!)
         #[allow(unconditional_recursion, unstable_name_collisions)]
         #[inline]
-        fn $op_outer(self) -> <Self as IPanicking>::Output {
+        fn $op_outer(self) -> <Self as IPanickingOps>::Output {
             Self::$op_inner(self).unwrap()
         }
     )*)

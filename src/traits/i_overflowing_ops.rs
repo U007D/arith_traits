@@ -4,7 +4,7 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait IOverflowing<T = Self>
+pub trait IOverflowingOps<T = Self>
 where
     Self: PartialOrd,
 {
@@ -26,7 +26,7 @@ where
 
 macro_rules! overflowing_impl {
     ($($t:ty)*) => ($(
-        impl IOverflowing for $t {
+        impl IOverflowingOps for $t {
             type Output = (Self, bool);
 
             binary_op_impl! {

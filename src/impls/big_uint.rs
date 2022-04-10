@@ -1,14 +1,14 @@
 #[cfg(test)]
 mod unit_tests;
 
-use crate::IWrapping;
+use crate::IWrappingOps;
 use num::{BigUint, Integer, Zero};
 use std::ops::{Add, Div, Mul, Rem, Shl, Shr, Sub};
 
 /// `Big"Uint` gets an `IWrapping` impl because it is the default unsigned extra-large type when the largest built-in
 /// type is used in certain circumstances (e.g. `(u*::MIN..=u*::MAX).count() == u*::MAX + 1`).  Even when `u256` comes
 /// along,this problem will remain, and `BigUint` will remain the default solution.
-impl IWrapping for BigUint {
+impl IWrappingOps for BigUint {
     type Output = Self;
 
     fn wrapping_abs(self) -> Self::Output {

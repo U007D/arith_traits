@@ -4,7 +4,7 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait IChecked<T = Self>: Sized
+pub trait ICheckedOps<T = Self>: Sized
 where
     Self: PartialOrd,
 {
@@ -26,7 +26,7 @@ where
 
 macro_rules! checked_impl {
     ($($t:ty)*) => ($(
-        impl IChecked for $t {
+        impl ICheckedOps for $t {
             type Output = Option<Self>;
 
             binary_op_impl! {

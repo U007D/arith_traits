@@ -4,9 +4,9 @@
 #[cfg(test)]
 mod unit_tests;
 
-use crate::IChecked;
+use crate::ICheckedOps;
 
-pub trait IPanicking<T = Self>
+pub trait IPanickingOps<T = Self>
 where
     Self: PartialOrd,
 {
@@ -28,7 +28,7 @@ where
 
 macro_rules! panicking_impl {
     ($($t:ty)*) => ($(
-        impl IPanicking for $t where $t: IChecked {
+        impl IPanickingOps for $t where $t: ICheckedOps {
             type Output = Self;
 
             panicking_binary_op_impl! {

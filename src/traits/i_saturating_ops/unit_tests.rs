@@ -5,9 +5,9 @@ use num_traits::identities::One;
 #[test]
 fn unconditional_recursion_warning_is_a_false_positive() {
     // Given an `ISaturating` "subtracter" function
-    fn sub_one<T>(n: T) -> <T as ISaturating>::Output
+    fn sub_one<T>(n: T) -> <T as ISaturatingOps>::Output
     where
-        T: ISaturating + One,
+        T: ISaturatingOps + One,
     {
         n.saturating_sub(T::one())
     }
