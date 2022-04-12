@@ -25,12 +25,12 @@ where
 }
 
 macro_rules! saturating_impl {
-    ($($t:ty)*) => ($(
+    ($tr:ty; $($t:ty),+ $(,)?) => ($(
         impl ISaturatingOps for $t {
             type Output = Self;
 
             binary_op_impl! {
-                $t,
+                $tr, $t;
                 saturating_add,
                 saturating_div,
                 saturating_div_euclid,
@@ -41,7 +41,7 @@ macro_rules! saturating_impl {
             }
 
             binary_op_impl! {
-                u32,
+                $tr, u32;
                 saturating_pow,
                 saturating_shl,
                 saturating_shr
@@ -55,4 +55,4 @@ macro_rules! saturating_impl {
     )*)
 }
 
-saturating_impl! { i8 i16 i32 i64 i128 isize u8 u16 u32 u64 u128 usize }
+saturating_impl! { ISaturatingOps; i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, }

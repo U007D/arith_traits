@@ -1,12 +1,12 @@
 /*
-                checked_add,
-                checked_div,
-                checked_div_euclid,
-                checked_mul,
-                checked_rem,
-                checked_rem_euclid,
-                checked_sub
- */
+               checked_add,
+               checked_div,
+               checked_div_euclid,
+               checked_mul,
+               checked_rem,
+               checked_rem_euclid,
+               checked_sub
+*/
 use super::*;
 use assert2::assert;
 use num_traits::identities::One;

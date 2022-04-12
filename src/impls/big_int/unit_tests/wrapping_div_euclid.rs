@@ -1,6 +1,6 @@
+use super::*;
 use assert2::assert;
 use num::BigInt;
-use super::*;
 
 #[test]
 fn positive_dividend_and_positive_divisor_yields_positive_quotient_and_rounds_toward_zero() {
@@ -99,7 +99,6 @@ fn negative_dividend_and_negative_divisor_yields_positive_quotient_and_rounds_aw
     // Then
     assert!(quotient == expected_quotient);
 }
-
 
 #[test]
 fn negative_dividend_and_even_negative_divisor_yields_positive_quotient_and_rounds_toward_zero() {

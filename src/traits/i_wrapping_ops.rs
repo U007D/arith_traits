@@ -1,55 +1,37 @@
-// suppress `use_self` recommendation; unavoidable in macro context
+// suppress spurious? `clippy::use_self` lint
 #![allow(clippy::use_self)]
 
+mod i_wrapping_non_generic_ops;
 #[cfg(test)]
 mod unit_tests;
 
-pub trait IWrappingOps<T = Self> {
-    type Output;
+pub use i_wrapping_non_generic_ops::IWrappingNonGenericOps;
 
-    fn wrapping_abs(self) -> Self::Output;
-    fn wrapping_add(self, rhs: T) -> Self::Output;
-    fn wrapping_div(self, rhs: T) -> Self::Output;
-    fn wrapping_div_euclid(self, rhs: T) -> Self::Output;
-    fn wrapping_mul(self, rhs: T) -> Self::Output;
-    fn wrapping_neg(self) -> Self::Output;
-    fn wrapping_pow(self, rhs: u32) -> Self::Output;
-    fn wrapping_rem(self, rhs: T) -> Self::Output;
-    fn wrapping_rem_euclid(self, rhs: T) -> Self::Output;
-    fn wrapping_shl(self, rhs: u32) -> Self::Output;
-    fn wrapping_shr(self, rhs: u32) -> Self::Output;
-    fn wrapping_sub(self, rhs: T) -> Self::Output;
+pub trait IWrappingOps<T = Self>: IWrappingNonGenericOps {
+    fn wrapping_add(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
+    fn wrapping_div(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
+    fn wrapping_div_euclid(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
+    fn wrapping_mul(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
+    fn wrapping_rem(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
+    fn wrapping_rem_euclid(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
+    fn wrapping_sub(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
 }
 
-macro_rules! wrapping_impl {
-    ($($t:ty)*) => ($(
+macro_rules! wrapping_ops {
+    ($tr:ty; $($t:ty),+ $(,)?) => ($(
         impl IWrappingOps for $t {
-            type Output = Self;
-
             binary_op_impl! {
-                $t,
+                $tr, $t;
                 wrapping_add,
                 wrapping_div,
                 wrapping_div_euclid,
                 wrapping_mul,
                 wrapping_rem,
                 wrapping_rem_euclid,
-                wrapping_sub
-            }
-
-            binary_op_impl! {
-                u32,
-                wrapping_pow,
-                wrapping_shl,
-                wrapping_shr
-            }
-
-            unary_op_impl! {
-                wrapping_abs,
-                wrapping_neg
+                wrapping_sub,
             }
         }
     )*)
 }
 
-wrapping_impl! { i8 i16 i32 i64 i128 isize u8 u16 u32 u64 u128 usize }
+wrapping_ops! { IWrappingNonGenericOps; i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, }

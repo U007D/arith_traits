@@ -5,7 +5,7 @@ use num_traits::identities::One;
 #[test]
 fn unconditional_recursion_warning_is_a_false_positive() {
     // Given an `IWrapping` "subtracter" function
-    fn sub_one<T>(n: T) -> <T as IWrappingOps>::Output
+    fn sub_one<T>(n: T) -> <T as IWrappingNonGenericOps>::Output
     where
         T: IWrappingOps + One,
     {

@@ -25,12 +25,12 @@ where
 }
 
 macro_rules! checked_impl {
-    ($($t:ty)*) => ($(
+    ($tr:ty; $($t:ty),+ $(,)?) => ($(
         impl ICheckedOps for $t {
             type Output = Option<Self>;
 
             binary_op_impl! {
-                $t,
+                $tr, $t;
                 checked_add,
                 checked_div,
                 checked_div_euclid,
@@ -41,7 +41,7 @@ macro_rules! checked_impl {
             }
 
             binary_op_impl! {
-                u32,
+                $tr, u32;
                 checked_pow,
                 checked_shl,
                 checked_shr
@@ -55,4 +55,4 @@ macro_rules! checked_impl {
     )*)
 }
 
-checked_impl! { i8 i16 i32 i64 i128 isize u8 u16 u32 u64 u128 usize }
+checked_impl! { ICheckedOps; i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, }

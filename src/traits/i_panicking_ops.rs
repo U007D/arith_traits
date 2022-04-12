@@ -27,12 +27,12 @@ where
 }
 
 macro_rules! panicking_impl {
-    ($($t:ty)*) => ($(
+    ($tr:ty; $($t:ty),+ $(,)?) => ($(
         impl IPanickingOps for $t where $t: ICheckedOps {
             type Output = Self;
 
             panicking_binary_op_impl! {
-                $t,
+                $tr, $t;
                 panicking_add, checked_add,
                 panicking_div, checked_div,
                 panicking_div_euclid, checked_div_euclid,
@@ -43,7 +43,7 @@ macro_rules! panicking_impl {
             }
 
             panicking_binary_op_impl! {
-                u32,
+                $tr, u32;
                 panicking_pow, checked_pow,
                 panicking_shl, checked_shl,
                 panicking_shr, checked_shr
@@ -57,4 +57,4 @@ macro_rules! panicking_impl {
     )*)
 }
 
-panicking_impl! { i8 i16 i32 i64 i128 isize u8 u16 u32 u64 u128 usize }
+panicking_impl! { IPanickingOps; i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, }

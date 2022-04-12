@@ -1,6 +1,6 @@
+use super::*;
 use assert2::assert;
 use num::BigUint;
-use super::*;
 
 #[test]
 fn positive_dividend_and_positive_divisor_yields_positive_quotient_and_rounds_toward_zero() {

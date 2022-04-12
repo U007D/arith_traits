@@ -6,6 +6,10 @@ mod i_saturating_ops;
 mod i_wrapping_ops;
 
 pub use {
-    i_checked_ops::ICheckedOps, i_min_max::IMinMax, i_overflowing_ops::IOverflowingOps, i_panicking_ops::IPanickingOps,
-    i_saturating_ops::ISaturatingOps, i_wrapping_ops::IWrappingOps,
+    i_checked_ops::ICheckedOps,
+    i_min_max::IMinMax,
+    i_overflowing_ops::IOverflowingOps,
+    i_panicking_ops::IPanickingOps,
+    i_saturating_ops::ISaturatingOps,
+    i_wrapping_ops::{IWrappingNonGenericOps, IWrappingOps},
 };
