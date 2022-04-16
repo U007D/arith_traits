@@ -11,5 +11,5 @@ pub use {
     i_overflowing_ops::IOverflowingOps,
     i_panicking_ops::IPanickingOps,
     i_saturating_ops::ISaturatingOps,
-    i_wrapping_ops::{IWrappingNonGenericOps, IWrappingOps},
+    i_wrapping_ops::{IUnaryWrappingOps, IWrappingOps},
 };

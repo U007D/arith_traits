@@ -1,20 +1,20 @@
 // suppress spurious? `clippy::use_self` lint
 #![allow(clippy::use_self)]
 
-mod i_wrapping_non_generic_ops;
+mod i_unary_wrapping_ops;
 #[cfg(test)]
 mod unit_tests;
 
-pub use i_wrapping_non_generic_ops::IWrappingNonGenericOps;
+pub use i_unary_wrapping_ops::IUnaryWrappingOps;
 
-pub trait IWrappingOps<T = Self>: IWrappingNonGenericOps {
-    fn wrapping_add(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
-    fn wrapping_div(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
-    fn wrapping_div_euclid(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
-    fn wrapping_mul(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
-    fn wrapping_rem(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
-    fn wrapping_rem_euclid(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
-    fn wrapping_sub(self, rhs: T) -> <Self as IWrappingNonGenericOps>::Output;
+pub trait IWrappingOps<T = Self>: IUnaryWrappingOps {
+    fn wrapping_add(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
+    fn wrapping_div(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
+    fn wrapping_div_euclid(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
+    fn wrapping_mul(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
+    fn wrapping_rem(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
+    fn wrapping_rem_euclid(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
+    fn wrapping_sub(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
 }
 
 macro_rules! wrapping_ops {
@@ -34,4 +34,4 @@ macro_rules! wrapping_ops {
     )*)
 }
 
-wrapping_ops! { IWrappingNonGenericOps; i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, }
+wrapping_ops! { IUnaryWrappingOps; i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, }

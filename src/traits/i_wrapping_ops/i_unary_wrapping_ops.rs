@@ -1,4 +1,4 @@
-pub trait IWrappingNonGenericOps {
+pub trait IUnaryWrappingOps: Clone {
     type Output;
 
     fn wrapping_abs(self) -> Self::Output;
@@ -8,7 +8,7 @@ pub trait IWrappingNonGenericOps {
     fn wrapping_shr(self, rhs: u32) -> Self::Output;
 }
 
-macro_rules! wrapping_non_generic_ops {
+macro_rules! unary_wrapping_ops {
     ($tr:ty; $($t:ty),+ $(,)?) => ($(
         impl $tr for $t {
             type Output = Self;
@@ -28,4 +28,4 @@ macro_rules! wrapping_non_generic_ops {
     )*)
 }
 
-wrapping_non_generic_ops! { IWrappingNonGenericOps; i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, }
+unary_wrapping_ops! { IUnaryWrappingOps; i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, }

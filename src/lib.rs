@@ -34,5 +34,5 @@ mod impls;
 mod traits;
 
 pub use traits::{
-    ICheckedOps, IMinMax, IOverflowingOps, ISaturatingOps, IWrappingNonGenericOps, IWrappingOps,
+    ICheckedOps, IMinMax, IOverflowingOps, ISaturatingOps, IUnaryWrappingOps, IWrappingOps,
 };
