@@ -11,7 +11,7 @@ This crate remedies that.  It was developed to simplify the implementation of th
 [`arith_wrappers`](https://github.com/u007d/arith_wrappers) crate.  It may also be of value to other crates performing
 generic arithmetic.
 
-This crate is currently at the PoC stage and is very incomplete.
+This crate is currently at a pre-alpha PoC stage and is very incomplete.
 
 ## License
 Licensed under either:

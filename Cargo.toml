@@ -11,7 +11,7 @@ repository = "https://github.com/u007d/arith_traits"
 version = "0.2.0"
 
 [dependencies]
-thiserror = "1"
+thiserror = "1.0.30"
 static_assertions = "1.1.0"
 num = "0.4.0"
 
@@ -42,5 +42,5 @@ opt-level = 0
 rpath = false
 
 [dev-dependencies]
-num-traits = "0.2"
+num-traits = "0.2.14"
 assert2 = "0.3.6"
