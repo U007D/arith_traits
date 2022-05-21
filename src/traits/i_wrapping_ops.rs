@@ -8,18 +8,26 @@ mod unit_tests;
 pub use i_unary_wrapping_ops::IUnaryWrappingOps;
 
 pub trait IWrappingOps<T = Self>: IUnaryWrappingOps {
-    fn wrapping_add(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
-    fn wrapping_div(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
-    fn wrapping_div_euclid(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
-    fn wrapping_mul(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
-    fn wrapping_rem(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
-    fn wrapping_rem_euclid(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
-    fn wrapping_sub(self, rhs: T) -> <Self as IUnaryWrappingOps>::Output;
+    type AddOutput = Self;
+    type DivOutput = Self;
+    type MulOutput = Self;
+    type Output = Self;
+    type SubOutput = Self;
+
+    fn wrapping_add(self, rhs: T) -> Self::AddOutput;
+    fn wrapping_div(self, rhs: T) -> Self::DivOutput;
+    fn wrapping_div_euclid(self, rhs: T) -> Self::DivOutput;
+    fn wrapping_mul(self, rhs: T) -> Self::MulOutput;
+    fn wrapping_rem(self, rhs: T) -> <Self as IWrappingOps>::Output where Self: IWrappingOps;
+    fn wrapping_rem_euclid(self, rhs: T) -> <Self as IWrappingOps>::Output where Self: IWrappingOps;
+    fn wrapping_sub(self, rhs: T) -> Self::SubOutput;
 }
 
 macro_rules! wrapping_ops {
     ($tr:ty; $($t:ty),+ $(,)?) => ($(
         impl IWrappingOps for $t {
+            type Output = Self;
+
             binary_op_impl! {
                 $tr, $t;
                 wrapping_add,

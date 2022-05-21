@@ -1,3 +1,4 @@
+#![feature(associated_type_defaults)]
 #![warn(clippy::all, clippy::nursery, clippy::pedantic, rust_2018_idioms)]
 // Safety-critical application lints
 #![deny(

@@ -1,5 +1,5 @@
 pub trait IUnaryWrappingOps: Clone {
-    type Output;
+    type Output = Self;
 
     fn wrapping_abs(self) -> Self::Output;
     fn wrapping_neg(self) -> Self::Output;
