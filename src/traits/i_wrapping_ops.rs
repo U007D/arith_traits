@@ -8,25 +8,26 @@ mod unit_tests;
 pub use i_unary_wrapping_ops::IUnaryWrappingOps;
 
 pub trait IWrappingOps<T = Self>: IUnaryWrappingOps {
-    type AddOutput = Self;
-    type DivOutput = Self;
-    type MulOutput = Self;
-    type Output = Self;
-    type SubOutput = Self;
+    // Each operation's `Output` is defined distinctly to support typed ranged arithmetic
+    type AddOutput: IWrappingOps = Self where Self: IWrappingOps;
+    type DivOutput: IWrappingOps = Self where Self: IWrappingOps;
+    type MulOutput: IWrappingOps = Self where Self: IWrappingOps;
+    type RemOutput: IWrappingOps = Self where Self: IWrappingOps;
+    type SubOutput: IWrappingOps = Self where Self: IWrappingOps;
 
-    fn wrapping_add(self, rhs: T) -> Self::AddOutput;
-    fn wrapping_div(self, rhs: T) -> Self::DivOutput;
-    fn wrapping_div_euclid(self, rhs: T) -> Self::DivOutput;
-    fn wrapping_mul(self, rhs: T) -> Self::MulOutput;
-    fn wrapping_rem(self, rhs: T) -> <Self as IWrappingOps>::Output where Self: IWrappingOps;
-    fn wrapping_rem_euclid(self, rhs: T) -> <Self as IWrappingOps>::Output where Self: IWrappingOps;
-    fn wrapping_sub(self, rhs: T) -> Self::SubOutput;
+    fn wrapping_add(self, rhs: T) -> <Self as IWrappingOps<T>>::AddOutput where Self: IWrappingOps;
+    fn wrapping_div(self, rhs: T) -> <Self as IWrappingOps<T>>::DivOutput where Self: IWrappingOps;
+    fn wrapping_div_euclid(self, rhs: T) -> <Self as IWrappingOps<T>>::DivOutput where Self: IWrappingOps;
+    fn wrapping_mul(self, rhs: T) -> <Self as IWrappingOps<T>>::MulOutput where Self: IWrappingOps;
+    fn wrapping_rem(self, rhs: T) -> <Self as IWrappingOps<T>>::RemOutput where Self: IWrappingOps;
+    fn wrapping_rem_euclid(self, rhs: T) -> <Self as IWrappingOps<T>>::RemOutput where Self: IWrappingOps;
+    fn wrapping_sub(self, rhs: T) -> <Self as IWrappingOps<T>>::SubOutput where Self: IWrappingOps;
 }
 
 macro_rules! wrapping_ops {
     ($tr:ty; $($t:ty),+ $(,)?) => ($(
         impl IWrappingOps for $t {
-            type Output = Self;
+            type RemOutput = Self;
 
             binary_op_impl! {
                 $tr, $t;

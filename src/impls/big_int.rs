@@ -6,9 +6,10 @@ use crate::IWrappingOps;
 use num::{BigInt, Integer, Signed};
 use std::ops::{Add, Div, Mul, Neg, Rem, Shl, Shr, Sub};
 
-/// `BigInt` gets an `IWrapping` impl because it is the default signed extra-large type when the largest built-in type
-/// is used in certain circumstances (e.g. `(i*::MIN..=i*::MAX).count() == i*::MAX + 1`).  Even once `i256` comes along,
-/// this problem will remain (for `i256`), and `BigInt` will remain the default solution.
+/// `BigInt` gets an `IWrappingOps` impl because it is the default signed extra-large type when the
+/// largest built-in type is used in certain circumstances (e.g.
+/// `(i*::MIN..=i*::MAX).count() == i*::MAX + 1`).  Even once `i256` comes along, this problem will
+/// remain (for `i256`), and `BigInt` will remain the default solution.
 impl IWrappingOps for BigInt {
     fn wrapping_add(self, rhs: Self) -> Self::AddOutput {
         self.add(rhs)
@@ -60,7 +61,7 @@ impl<'a> IWrappingOps for &'a BigInt {
     type AddOutput = BigInt;
     type DivOutput = BigInt;
     type MulOutput = BigInt;
-    type Output = BigInt;
+    type RemOutput = BigInt;
     type SubOutput = BigInt;
 
     fn wrapping_add(self, rhs_ref: Self) -> Self::AddOutput {
@@ -88,11 +89,11 @@ impl<'a> IWrappingOps for &'a BigInt {
         self.mul(rhs_ref)
     }
 
-    fn wrapping_rem(self, rhs_ref: Self) -> <Self as IWrappingOps>::Output {
+    fn wrapping_rem(self, rhs_ref: Self) -> Self::RemOutput {
         self.rem(rhs_ref)
     }
 
-    fn wrapping_rem_euclid(self, rhs_ref: Self) -> <Self as IWrappingOps>::Output {
+    fn wrapping_rem_euclid(self, rhs_ref: Self) -> Self::RemOutput {
         // Algorithm adapted from https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/divmodnote-letter.pdf
         let (_, remainder) = self.div_rem(rhs_ref);
         match remainder.is_negative() {

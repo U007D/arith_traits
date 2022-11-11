@@ -1,11 +1,9 @@
 #[macro_export]
 
-// TODO: Use UFCS instead of suppressing linter false-positives to disambiguate between trait methods and inherent
-//       methods of the same name.  Improves readability to the user without context.
 macro_rules! binary_op_impl {
     ($tr:ty, $typ:ty; $($op:ident),+ $(,)?) => ($(
-        // suppress false-positive `unconditional_recursion` warnings; see
-        // `unit_tests::unconditional_recursion_warning_is_a_false_positive()` for proof warnings are false-positives.
+        // suppress false-positive `unconditional_recursion` warnings; for proof warnings are
+        // false-positives, see `unit_tests::unconditional_recursion_warning_is_a_false_positive()`.
         #[allow(unconditional_recursion)]
         #[inline]
         fn $op(self, rhs: $typ) -> <Self as $tr>::Output {
@@ -13,7 +11,6 @@ macro_rules! binary_op_impl {
         }
     )*)
 }
-
 #[macro_export]
 macro_rules! panicking_binary_op_impl {
     ($tr:ty, $typ:ty; $($op_outer:ident, $op_inner:ident),+ $(,)?) => ($(

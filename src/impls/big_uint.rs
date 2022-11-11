@@ -6,9 +6,10 @@ use crate::IWrappingOps;
 use num::{BigUint, Integer, Zero};
 use std::ops::{Add, Div, Mul, Rem, Shl, Shr, Sub};
 
-/// `Big"Uint` gets an `IWrapping` impl because it is the default unsigned extra-large type when the largest built-in
-/// type is used in certain circumstances (e.g. `(u*::MIN..=u*::MAX).count() == u*::MAX + 1`).  Even once `u256` comes
-/// along,this problem will remain (for `u256`), and `BigUint` will remain the default solution.
+/// `Big"Uint` gets an `IWrappingOps` impl because it is the default unsigned extra-large type when
+/// the largest built-in type is used in certain circumstances (e.g.
+/// `(u*::MIN..=u*::MAX).count() == u*::MAX + 1`).  Even once `u256` comes along,this problem will
+/// remain (for `u256`), and `BigUint` will remain the default solution.
 impl IWrappingOps for BigUint {
     fn wrapping_add(self, rhs: Self) -> Self::AddOutput {
         self.add(rhs)
@@ -26,11 +27,11 @@ impl IWrappingOps for BigUint {
         self.mul(rhs)
     }
 
-    fn wrapping_rem(self, rhs: Self) -> <Self as IWrappingOps>::Output {
+    fn wrapping_rem(self, rhs: Self) -> Self::RemOutput {
         self.rem(rhs)
     }
 
-    fn wrapping_rem_euclid(self, rhs: Self) -> <Self as IWrappingOps>::Output {
+    fn wrapping_rem_euclid(self, rhs: Self) -> Self::RemOutput {
         self.div_rem(&rhs).1
     }
 
@@ -43,7 +44,7 @@ impl<'a> IWrappingOps for &'a BigUint {
     type AddOutput = BigUint;
     type DivOutput = BigUint;
     type MulOutput = BigUint;
-    type Output = BigUint;
+    type RemOutput = BigUint;
     type SubOutput = BigUint;
 
     fn wrapping_add(self, rhs_ref: Self) -> Self::AddOutput {
@@ -62,11 +63,11 @@ impl<'a> IWrappingOps for &'a BigUint {
         self.mul(rhs_ref)
     }
 
-    fn wrapping_rem(self, rhs_ref: Self) -> <Self as IWrappingOps>::Output {
+    fn wrapping_rem(self, rhs_ref: Self) -> Self::RemOutput {
         self.rem(rhs_ref)
     }
 
-    fn wrapping_rem_euclid(self, rhs_ref: Self) -> <Self as IWrappingOps>::Output {
+    fn wrapping_rem_euclid(self, rhs_ref: Self) -> Self::RemOutput {
         self.div_rem(rhs_ref).1
     }
 
