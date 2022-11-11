@@ -31,7 +31,8 @@
 
 #[macro_use]
 mod op_impl_macros; // macros must be declared before trait modules
-mod impls;
+#[cfg(feature = "xl_value_types")]
+mod xl_value_types;
 mod traits;
 
 pub use traits::{
