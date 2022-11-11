@@ -8,7 +8,7 @@ license = "MIT OR Apache-2.0"
 name = "arith_traits"
 readme = "README.md"
 repository = "https://github.com/u007d/arith_traits"
-version = "0.3.1"
+version = "0.3.2"
 
 [dependencies]
 thiserror = "1.0.37"
@@ -21,7 +21,7 @@ assert2 = "0.3.6"
 
 [features]
 default = []
-xl_value_types = ["dep:num"]
+xl_types = ["dep:num"]
 
 [profile.dev]
 codegen-units = 1
