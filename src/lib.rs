@@ -36,5 +36,5 @@ mod xl_types;
 mod traits;
 
 pub use traits::{
-    ICheckedOps, IMinMax, IOverflowingOps, ISaturatingOps, IUnaryWrappingOps, IWrappingOps,
+    ICheckedOps, IMinMax, IOverflowingOps, ISaturatingOps, IWrappingOps,
 };
