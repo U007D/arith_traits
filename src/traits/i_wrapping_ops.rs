@@ -8,7 +8,6 @@ mod unit_tests;
 pub use i_unary_wrapping_ops::IUnaryWrappingOps;
 
 pub trait IWrappingOps<T = Self>: IUnaryWrappingOps {
-    // Each operation's `Output` is defined distinctly to support typed ranged arithmetic
     type AddOutput: IWrappingOps = Self where Self: IWrappingOps;
     type DivOutput: IWrappingOps = Self where Self: IWrappingOps;
     type MulOutput: IWrappingOps = Self where Self: IWrappingOps;

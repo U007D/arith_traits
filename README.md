@@ -11,6 +11,8 @@ This crate remedies that.  It was developed to simplify the implementation of th
 [`arith_wrappers`](https://github.com/u007d/arith_wrappers) crate.  It may also be of value to other crates performing
 generic arithmetic.
 
+NOTE: Currently requires nightly compiler.
+
 ## License
 Licensed under either:
 * MIT license (see LICENSE-MIT file)

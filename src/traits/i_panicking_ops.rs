@@ -6,10 +6,7 @@ mod unit_tests;
 
 use crate::ICheckedOps;
 
-pub trait IPanickingOps<T = Self>
-where
-    Self: PartialOrd,
-{
+pub trait IPanickingOps<T = Self> {
     type Output;
 
     fn panicking_abs(self) -> Self::Output;
