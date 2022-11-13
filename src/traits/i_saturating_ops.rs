@@ -5,36 +5,40 @@
 mod unit_tests;
 
 pub trait ISaturatingOps<T = Self> {
+    type Output/*: Into<()>*/;
+
     #[must_use]
-    fn saturating_abs(self) -> Self;
+    fn saturating_abs(self) -> Self::Output;
     #[must_use]
-    fn saturating_add(self, rhs: T) -> Self;
+    fn saturating_add(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn saturating_div(self, rhs: T) -> Self;
+    fn saturating_div(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn saturating_div_euclid(self, rhs: T) -> Self;
+    fn saturating_div_euclid(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn saturating_mul(self, rhs: T) -> Self;
+    fn saturating_mul(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn saturating_neg(self) -> Self;
+    fn saturating_neg(self) -> Self::Output;
     #[must_use]
-    fn saturating_pow(self, rhs: u32) -> Self;
+    fn saturating_pow(self, rhs: u32) -> Self::Output;
     #[must_use]
-    fn saturating_rem(self, rhs: T) -> Self;
+    fn saturating_rem(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn saturating_rem_euclid(self, rhs: T) -> Self;
+    fn saturating_rem_euclid(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn saturating_shl(self, rhs: u32) -> Self;
+    fn saturating_shl(self, rhs: u32) -> Self::Output;
     #[must_use]
-    fn saturating_shr(self, rhs: u32) -> Self;
+    fn saturating_shr(self, rhs: u32) -> Self::Output;
     #[must_use]
-    fn saturating_sub(self, rhs: T) -> Self;
+    fn saturating_sub(self, rhs: T) -> Self::Output;
 }
 
 macro_rules! saturating_impl {
     ($tr:ty, $ret:ty; $($t:ty),+ $(,)?) => ($(
         impl ISaturatingOps for $t {
-            binary_op_impl! {
+           type Output = $ret;
+
+           binary_op_impl! {
                 $tr, $t, $ret;
                 saturating_add,
                 saturating_div,
@@ -53,7 +57,7 @@ macro_rules! saturating_impl {
             }
 
             unary_op_impl! {
-                $ret;
+               $ret;
                 saturating_abs,
                 saturating_neg
             }

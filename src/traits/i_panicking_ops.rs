@@ -7,35 +7,39 @@ mod unit_tests;
 use crate::ICheckedOps;
 
 pub trait IPanickingOps<T = Self>: Sized {
+    type Output/*: Into<()>*/;
+
     #[must_use]
-    fn panicking_abs(self) -> Self;
+    fn panicking_abs(self) -> Self::Output;
     #[must_use]
-    fn panicking_add(self, rhs: T) -> Self;
+    fn panicking_add(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn panicking_div(self, rhs: T) -> Self;
+    fn panicking_div(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn panicking_div_euclid(self, rhs: T) -> Self;
+    fn panicking_div_euclid(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn panicking_mul(self, rhs: T) -> Self;
+    fn panicking_mul(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn panicking_neg(self) -> Self;
+    fn panicking_neg(self) -> Self::Output;
     #[must_use]
-    fn panicking_pow(self, rhs: u32) -> Self;
+    fn panicking_pow(self, rhs: u32) -> Self::Output;
     #[must_use]
-    fn panicking_rem(self, rhs: T) -> Self;
+    fn panicking_rem(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn panicking_rem_euclid(self, rhs: T) -> Self;
+    fn panicking_rem_euclid(self, rhs: T) -> Self::Output;
     #[must_use]
-    fn panicking_shl(self, rhs: u32) -> Self;
+    fn panicking_shl(self, rhs: u32) -> Self::Output;
     #[must_use]
-    fn panicking_shr(self, rhs: u32) -> Self;
+    fn panicking_shr(self, rhs: u32) -> Self::Output;
     #[must_use]
-    fn panicking_sub(self, rhs: T) -> Self;
+    fn panicking_sub(self, rhs: T) -> Self::Output;
 }
 
 macro_rules! panicking_impl {
     ($tr:ty, $ret:ty; $($typ:ty),+ $(,)?) => ($(
         impl IPanickingOps for $typ where $typ: ICheckedOps {
+            type Output = $ret;
+
             panicking_binary_op_impl! {
                 $tr, $typ, $ret;
                 panicking_add, checked_add,

@@ -4,36 +4,36 @@
 #[cfg(test)]
 mod unit_tests;
 
-pub trait IOverflowingOps<T = Self>: Sized {
+pub trait IOverflowingOps<T>: Sized {
     #[must_use]
-    fn overflowing_abs(self) -> Self;
+    fn overflowing_abs(self) -> (Self, bool);
     #[must_use]
-    fn overflowing_add(self, rhs: T) -> Self;
+    fn overflowing_add(self, rhs: T) -> (Self, bool);
     #[must_use]
-    fn overflowing_div(self, rhs: T) -> Self;
+    fn overflowing_div(self, rhs: T) -> (Self, bool);
     #[must_use]
-    fn overflowing_div_euclid(self, rhs: T) -> Self;
+    fn overflowing_div_euclid(self, rhs: T) -> (Self, bool);
     #[must_use]
-    fn overflowing_mul(self, rhs: T) -> Self;
+    fn overflowing_mul(self, rhs: T) -> (Self, bool);
     #[must_use]
-    fn overflowing_neg(self) -> Self;
+    fn overflowing_neg(self) -> (Self, bool);
     #[must_use]
-    fn overflowing_pow(self, rhs: u32) -> Self;
+    fn overflowing_pow(self, rhs: u32) -> (Self, bool);
     #[must_use]
-    fn overflowing_rem(self, rhs: T) -> Self;
+    fn overflowing_rem(self, rhs: T) -> (Self, bool);
     #[must_use]
-    fn overflowing_rem_euclid(self, rhs: T) -> Self;
+    fn overflowing_rem_euclid(self, rhs: T) -> (Self, bool);
     #[must_use]
-    fn overflowing_shl(self, rhs: u32) -> Self;
+    fn overflowing_shl(self, rhs: u32) -> (Self, bool);
     #[must_use]
-    fn overflowing_shr(self, rhs: u32) -> Self;
+    fn overflowing_shr(self, rhs: u32) -> (Self, bool);
     #[must_use]
-    fn overflowing_sub(self, rhs: T) -> Self;
+    fn overflowing_sub(self, rhs: T) -> (Self, bool);
 }
 
 macro_rules! overflowing_impl {
     ($tr:ty, $ret:ty; $($typ:ty),+ $(,)?) => ($(
-        impl IOverflowingOps for $typ {
+        impl IOverflowingOps<Self> for $typ {
             binary_op_impl! {
                 $tr, $typ, $ret;
                 overflowing_add,
@@ -61,4 +61,4 @@ macro_rules! overflowing_impl {
     )*)
 }
 
-overflowing_impl! { IOverflowingOps, Self; i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, }
+overflowing_impl! { IOverflowingOps, (Self, bool); i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, }

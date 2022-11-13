@@ -16,6 +16,7 @@
     clippy::match_bool,
     clippy::missing_errors_doc,
     clippy::module_name_repetitions,
+    clippy::similar_names,
     clippy::wildcard_imports
 )]
 // To use the `unsafe` keyword, do not remove the `unsafe_code` attribute entirely.
@@ -31,10 +32,10 @@
 
 #[macro_use]
 mod op_impl_macros; // macros must be declared before trait modules
+mod policy;
+mod traits;
 #[cfg(feature = "xl_types")]
 mod xl_types;
-mod traits;
 
-pub use traits::{
-    ICheckedOps, IMinMax, IOverflowingOps, ISaturatingOps, IWrappingOps,
-};
+pub use policy::{OverflowingPolicy, WrappingPolicy};
+pub use traits::{ICheckedOps, IMinMax, IOverflowingOps, ISaturatingOps, IWrappingOps};
