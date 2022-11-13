@@ -32,10 +32,8 @@
 
 #[macro_use]
 mod op_impl_macros; // macros must be declared before trait modules
-mod policy;
 mod traits;
 #[cfg(feature = "xl_types")]
 mod xl_types;
 
-pub use policy::{OverflowingPolicy, WrappingPolicy};
 pub use traits::{ICheckedOps, IMinMax, IOverflowingOps, ISaturatingOps, IWrappingOps};
