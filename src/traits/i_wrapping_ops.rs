@@ -5,39 +5,35 @@
 mod unit_tests;
 
 pub trait IWrappingOps<T = Self> {
-    type Output/*: Into<WrappingPolicy<T>>*/;
-
     #[must_use]
-    fn wrapping_abs(self) -> Self::Output;
+    fn wrapping_abs(self) -> Self;
     #[must_use]
-    fn wrapping_add(self, rhs: T) -> Self::Output;
+    fn wrapping_add(self, rhs: T) -> Self;
     #[must_use]
-    fn wrapping_div(self, rhs: T) -> Self::Output;
+    fn wrapping_div(self, rhs: T) -> Self;
     #[must_use]
-    fn wrapping_div_euclid(self, rhs: T) -> Self::Output;
+    fn wrapping_div_euclid(self, rhs: T) -> Self;
     #[must_use]
-    fn wrapping_mul(self, rhs: T) -> Self::Output;
+    fn wrapping_mul(self, rhs: T) -> Self;
     #[must_use]
-    fn wrapping_neg(self) -> Self::Output;
+    fn wrapping_neg(self) -> Self;
     #[must_use]
-    fn wrapping_pow(self, rhs: u32) -> Self::Output;
+    fn wrapping_pow(self, rhs: u32) -> Self;
     #[must_use]
-    fn wrapping_rem(self, rhs: T) -> Self::Output;
+    fn wrapping_rem(self, rhs: T) -> Self;
     #[must_use]
-    fn wrapping_rem_euclid(self, rhs: T) -> Self::Output;
+    fn wrapping_rem_euclid(self, rhs: T) -> Self;
     #[must_use]
-    fn wrapping_shl(self, rhs: u32) -> Self::Output;
+    fn wrapping_shl(self, rhs: u32) -> Self;
     #[must_use]
-    fn wrapping_shr(self, rhs: u32) -> Self::Output;
+    fn wrapping_shr(self, rhs: u32) -> Self;
     #[must_use]
-    fn wrapping_sub(self, rhs: T) -> Self::Output;
+    fn wrapping_sub(self, rhs: T) -> Self;
 }
 
 macro_rules! wrapping_impl {
     ($tr:ty, $ret:ty; $($t:ty),+ $(,)?) => ($(
         impl IWrappingOps for $t {
-            type Output = $ret;
-
             binary_op_impl! {
                 $tr, $t, $ret;
                 wrapping_add,
